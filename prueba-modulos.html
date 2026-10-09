@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Prueba de modulos</title>
+</head>
+<body>
+<div id="salida">cargando</div>
+<script src="js/supabase-config.js" onerror="window.__configFaltante = true"></script>
+<script type="module">
+const salida = document.getElementById('salida');
+const resultados = [];
+
+function probar(nombre, existe) {
+    resultados.push(`${existe ? 'OK' : 'FALLO'} ${nombre}`);
+}
+
+try {
+    const cliente = await import('./js/supabase-cliente.js');
+    probar('supabase-cliente: supabaseConfigurado=' + cliente.supabaseConfigurado, cliente.supabaseConfigurado === false);
+    probar('supabase-cliente: cargarCliente es funcion', typeof cliente.cargarCliente === 'function');
+    probar('supabase-cliente: obtenerSesion devuelve null sin config',
+        (await cliente.obtenerSesion()) === null);
+
+    const auth = await import('./js/auth.js');
+    probar('auth: iniciarAutenticacion', typeof auth.iniciarAutenticacion === 'function');
+    probar('auth: alCambiarSesion', typeof auth.alCambiarSesion === 'function');
+    probar('auth: abrirModalAuth', typeof auth.abrirModalAuth === 'function');
+    probar('auth: cerrarSesion', typeof auth.cerrarSesion === 'function');
+
+    const carrito = await import('./js/carrito.js');
+    probar('carrito: id de "Dior Sauvage" = ' + carrito.generarId('Dior Sauvage'), carrito.generarId('Dior Sauvage') === 'dior-sauvage');
+    probar('carrito: precio de "S/1,400" = ' + carrito.precioANumero('S/1,400'), carrito.precioANumero('S/1,400') === 1400);
+    probar('carrito: formato de 1400 = ' + carrito.formatearPrecio(1400), carrito.formatearPrecio(1400) === 'S/1,400');
+    probar('carrito: iniciarCarrito', typeof carrito.iniciarCarrito === 'function');
+
+    const pagina = await import('./js/carrito-pagina.js');
+    probar('carrito-pagina: iniciarPaginaCarrito', typeof pagina.iniciarPaginaCarrito === 'function');
+
+    const avisos = await import('./js/avisos.js');
+    avisos.mostrarAviso('prueba automatica', 'exito');
+    probar('avisos: mostrarAviso crea el contenedor', Boolean(document.getElementById('avisos-flotantes')));
+
+    const app = await import('./js/app.js');
+    probar('app: modulo cargado', true);
+    await new Promise(resolver => setTimeout(resolver, 500));
+    probar('app: modal de cuenta inyectado', Boolean(document.getElementById('modal-auth')));
+    probar('app: aviso de configuracion visible', Boolean(document.getElementById('aviso-configuracion')));
+
+    probar(`avisos: traduccion de error -> ${avisos.traducirErrorAutenticacion('Invalid login credentials')}`,
+        avisos.traducirErrorAutenticacion('Invalid login credentials') === 'Correo o contraseña incorrectos.');
+    probar(`avisos: traduccion de tabla ausente -> ${carrito.describirErrorCarrito({ code: '42P01' })}`,
+        carrito.describirErrorCarrito({ code: '42P01' }).includes('schema.sql'));
+} catch (error) {
+    resultados.push('EXCEPCION: ' + error.message);
+}
+
+salida.textContent = resultados.join(' | ');
+</script>
+</body>
+</html>

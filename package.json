@@ -1,0 +1,14 @@
+{
+  "name": "the-house-of-parfum",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tienda de perfumes The House of Parfum: catálogo estático + Supabase Auth y carrito persistente.",
+  "scripts": {
+    "build": "node scripts/generate-config.js",
+    "dev": "node scripts/generate-config.js && node scripts/servidor-local.js",
+    "config": "node scripts/generate-config.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

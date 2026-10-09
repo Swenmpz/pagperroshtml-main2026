@@ -1,0 +1,45 @@
+# Dependencias y artefactos de build
+node_modules/
+dist/
+
+# Variables de entorno y configuración generada (¡contienen claves!)
+.env
+.env.local
+.env.*.local
+!.env.example
+js/supabase-config.js
+
+# Cachés
+.cache/
+
+# Netlify
+.netlify/
+
+# Sistema operativo / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Artefactos de pruebas y perfiles de navegador locales
+.chrome-*/
+_tmp/
+_prueba*
+pruebas-temp*
+prueba-log.txt
+prueba-resultado.txt
+resultado*.txt
+_headless-*
+diag-servidor.txt
+
+# Archivos de diagnóstico sueltos (no forman parte de la web)
+diag.txt
+estado.txt
+salida-limpia.txt
+tmp-verificar.ps1
+DIAGNOSTICO_INVALID_KEY.md

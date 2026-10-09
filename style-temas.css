@@ -1,0 +1,517 @@
+/* ==========================================================================
+   AJUSTES DE APARIENCIA · Temas, acentos y páginas de cuenta
+   Se carga SIEMPRE al final: afina lo que ya existe, no lo reemplaza.
+   · data-tema="claro"   → look moderno claro (style-modern.css activo)
+   · data-tema="dorado"  → clásico oscuro con dorados (style-modern.css off)
+   · data-acento="..."   → cambia el color de acento en ambos temas
+   ========================================================================== */
+
+/* ------------------------------- Acentos ------------------------------- */
+
+html[data-acento="dorado"] {
+    --gold: #c9a961;
+    --gold-light: #e4cd93;
+    --gradiente-dorado: linear-gradient(135deg, #c9a961 0%, #a9803f 100%);
+    --gradiente-dorado-hover: linear-gradient(135deg, #e4cd93 0%, #c9a961 100%);
+}
+
+html[data-acento="vino"] {
+    --gold: #b3455c;
+    --gold-light: #d97a8d;
+    --gradiente-dorado: linear-gradient(135deg, #b3455c 0%, #8d2f43 100%);
+    --gradiente-dorado-hover: linear-gradient(135deg, #d97a8d 0%, #b3455c 100%);
+}
+
+html[data-acento="verde"] {
+    --gold: #2f7d62;
+    --gold-light: #5aa98d;
+    --gradiente-dorado: linear-gradient(135deg, #2f7d62 0%, #1f5a46 100%);
+    --gradiente-dorado-hover: linear-gradient(135deg, #5aa98d 0%, #2f7d62 100%);
+}
+
+/* --------------------------- Botón de ajustes --------------------------- */
+
+.nav-ajustes {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color .25s, color .25s, transform .25s, background .25s;
+}
+
+.nav-ajustes svg {
+    width: 19px;
+    height: 19px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.nav-ajustes:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(14, 116, 144, .06);
+    transform: rotate(20deg);
+}
+
+html[data-tema="dorado"] .nav-ajustes:hover {
+    background: rgba(201, 169, 97, .1);
+}
+
+/* ------------------------- Página: configuración ------------------------ */
+
+.ajustes-cabecera {
+    max-width: 56ch;
+    margin-bottom: 40px;
+}
+
+.ajustes-cabecera h2 {
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.6vw, 40px);
+    font-weight: 800;
+    letter-spacing: -1.2px;
+    margin-top: 10px;
+}
+
+.ajustes-cabecera p {
+    color: var(--muted);
+    margin-top: 12px;
+}
+
+.ajustes-bloque {
+    padding: 26px 26px 30px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: var(--sombra-suave);
+    margin-bottom: 22px;
+}
+
+html[data-tema="dorado"] .ajustes-bloque {
+    background: var(--espresso-light);
+}
+
+.ajustes-bloque h3 {
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+.ajustes-bloque > p {
+    color: var(--muted);
+    font-size: 13.5px;
+    margin-bottom: 20px;
+}
+
+.tema-opciones {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.tema-opcion {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 16px;
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--font-body);
+    transition: border-color .25s, box-shadow .25s, transform .2s;
+}
+
+.tema-opcion:hover {
+    border-color: var(--gold-light);
+    transform: translateY(-2px);
+}
+
+.tema-opcion.activo {
+    border-color: var(--gold);
+    box-shadow: var(--sombra-dorada);
+}
+
+.tema-opcion strong {
+    color: var(--ink);
+    font-size: 14.5px;
+    margin-top: 10px;
+}
+
+.tema-opcion small {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.tema-muestra {
+    display: block;
+    width: 100%;
+    height: 64px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    position: relative;
+}
+
+.muestra-claro {
+    background: linear-gradient(135deg, #ffffff 0%, #edf7f8 70%, #d7edf1 100%);
+}
+
+.muestra-dorado {
+    background: linear-gradient(135deg, #211a13 0%, #15100c 100%);
+}
+
+.tema-muestra::after {
+    content: '';
+    position: absolute;
+    left: 14px;
+    bottom: 16px;
+    width: 34%;
+    height: 10px;
+    border-radius: 999px;
+}
+
+.muestra-claro::after { background: #0e7490; opacity: .85; }
+.muestra-dorado::after { background: linear-gradient(135deg, #c9a961, #a9803f); }
+
+.acento-opciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.acento-opcion {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 16px 9px 10px;
+    border: 2px solid var(--border);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color .25s, transform .2s, box-shadow .25s;
+}
+
+.acento-opcion:hover {
+    transform: translateY(-1px);
+}
+
+.acento-opcion.activo {
+    border-color: var(--gold);
+    box-shadow: var(--sombra-suave);
+}
+
+.acento-punto {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, .12);
+}
+
+.punto-turquesa { background: #0e7490; }
+.punto-dorado { background: #c9a961; }
+.punto-vino { background: #b3455c; }
+.punto-verde { background: #2f7d62; }
+
+.ajustes-nota {
+    color: var(--muted);
+    font-size: 12.5px;
+    margin-top: 18px;
+}
+
+.ajustes-enlace {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    padding: 13px 22px;
+    border-radius: 11px;
+    border: 1px solid var(--gold);
+    background: var(--gradiente-dorado);
+    color: #fff;
+    font-size: 13.5px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background .25s, transform .2s, box-shadow .25s;
+}
+
+.ajustes-enlace:hover {
+    background: var(--gradiente-dorado-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-dorada);
+    color: #fff;
+}
+
+/* --------------------------- Página: mi perfil -------------------------- */
+
+.perfil-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 26px;
+    align-items: start;
+}
+
+.perfil-tarjeta {
+    padding: 30px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: var(--sombra-suave);
+}
+
+html[data-tema="dorado"] .perfil-tarjeta {
+    background: var(--espresso-light);
+}
+
+.perfil-avatar {
+    display: grid;
+    place-items: center;
+    width: 74px;
+    height: 74px;
+    border-radius: 50%;
+    background: var(--gradiente-dorado);
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: 27px;
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.perfil-tarjeta h2 {
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: -.8px;
+}
+
+.perfil-correo {
+    color: var(--muted);
+    font-size: 13.5px;
+    margin-top: 4px;
+}
+
+.perfil-aviso-sesion {
+    margin-top: 18px;
+    padding: 14px 16px;
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.perfil-aviso-sesion button {
+    margin-top: 10px;
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: 1px solid var(--gold);
+    background: var(--gradiente-dorado);
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.perfil-formulario h3 {
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 800;
+    margin: 26px 0 4px;
+}
+
+.perfil-formulario h3:first-of-type {
+    margin-top: 0;
+}
+
+.perfil-formulario .subtitulo-seccion {
+    color: var(--muted);
+    font-size: 12.5px;
+    margin-bottom: 16px;
+}
+
+.perfil-formulario .campo-grupo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 18px;
+}
+
+.perfil-formulario .acciones-perfil {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 26px;
+}
+
+.perfil-formulario .acciones-perfil button {
+    width: auto;
+    display: inline-flex;
+    padding: 13px 26px;
+}
+
+.perfil-formulario .acciones-perfil .btn-fantasma {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 11px;
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color .25s, color .25s;
+}
+
+.perfil-formulario .acciones-perfil .btn-fantasma:hover {
+    border-color: var(--wine);
+    color: var(--wine);
+}
+
+/* ------------------------------ Secciones ------------------------------- */
+
+.historia-grid {
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: 44px;
+    align-items: center;
+}
+
+.historia-texto .eyebrow {
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+}
+
+.historia-texto h2 {
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.8vw, 42px);
+    font-weight: 800;
+    letter-spacing: -1.3px;
+    line-height: 1.12;
+    margin: 10px 0 18px;
+}
+
+.historia-texto p {
+    color: var(--muted);
+    font-size: 15px;
+    margin-bottom: 14px;
+    max-width: 56ch;
+}
+
+.historia-dato {
+    padding: 30px 28px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: var(--sombra-suave);
+}
+
+html[data-tema="dorado"] .historia-dato {
+    background: var(--espresso-light);
+}
+
+.historia-dato strong {
+    display: block;
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.historia-dato span {
+    display: block;
+    color: var(--muted);
+    font-size: 13px;
+    margin: 4px 0 18px;
+}
+
+.historia-dato strong:last-of-type,
+.historia-dato span:last-of-type {
+    margin-bottom: 0;
+}
+
+.testimonios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 18px;
+}
+
+.testimonio {
+    padding: 24px 22px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: none;
+}
+
+html[data-tema="dorado"] .testimonio {
+    background: var(--espresso-light);
+}
+
+.testimonio p {
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.testimonio .testimonio-quien {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 12.5px;
+}
+
+.testimonio .testimonio-quien strong {
+    color: var(--gold);
+    font-weight: 700;
+}
+
+/* ------------------------------ Responsive ------------------------------ */
+
+@media (max-width: 900px) {
+    .historia-grid,
+    .perfil-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .perfil-formulario .campo-grupo {
+        grid-template-columns: 1fr;
+    }
+
+    .ajustes-bloque {
+        padding: 20px 18px 24px;
+    }
+
+    .perfil-tarjeta {
+        padding: 22px 18px;
+    }
+
+    .nav-ajustes {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+

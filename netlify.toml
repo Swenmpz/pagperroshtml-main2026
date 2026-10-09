@@ -1,0 +1,46 @@
+# ------------------------------------------------------------------
+#  Configuración de despliegue en Netlify (netlify.app)
+#  Repositorio: GitHub  ->  Netlify  ->  Supabase
+# ------------------------------------------------------------------
+
+[build]
+  # No hay framework: la web es HTML/CSS/JS estático.
+  command = "npm run build"
+  publish = "."
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Los módulos ES y las llamadas a Supabase se sirven tal cual.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Redirecciones limpias para las páginas principales.
+[[redirects]]
+  from = "/perfumes"
+  to = "/perfumes.html"
+  status = 200
+
+[[redirects]]
+  from = "/carrito"
+  to = "/carrito.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog"
+  to = "/blog.html"
+  status = 200
+
+[[redirects]]
+  from = "/contacto"
+  to = "/contacto.html"
+  status = 200

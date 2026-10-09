@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración | The House of Parfum</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-modern.css" id="css-moderna">
+    <link rel="stylesheet" href="style-temas.css">
+    <link rel="shortcut icon" href="img/favicon.ico.ico" type="image/x-icon">
+    <script>
+        (function () {
+            var raiz = document.documentElement;
+            try {
+                var tema = localStorage.getItem('thop-tema') === 'dorado' ? 'dorado' : 'claro';
+                var acento = localStorage.getItem('thop-acento');
+                if (!acento) acento = tema === 'dorado' ? 'dorado' : 'turquesa';
+                raiz.setAttribute('data-tema', tema);
+                raiz.setAttribute('data-acento', acento);
+                if (tema === 'dorado') document.getElementById('css-moderna').disabled = true;
+            } catch (e) {
+                raiz.setAttribute('data-tema', 'claro');
+                raiz.setAttribute('data-acento', 'turquesa');
+            }
+        })();
+    </script>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="contenedor nav-inner">
+        <a href="index.html" class="marca">The House of Parfum</a>
+        <ul class="menu">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="perfumes.html">Perfumes</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+        <div class="nav-acciones">
+            <a href="carrito.html" class="nav-carrito" aria-label="Ver mi carrito" title="Mi carrito">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M5.5 7.5h13l-1.3 12.2a2 2 0 0 1-2 1.8H8.8a2 2 0 0 1-2-1.8L5.5 7.5Z"/>
+                    <path d="M9.2 7.5V6a2.8 2.8 0 0 1 5.6 0v1.5"/>
+                </svg>
+                <span class="badge-carrito" id="badge-carrito" hidden>0</span>
+            </a>
+            <a href="configuracion.html" class="nav-ajustes" aria-label="Configuración" title="Configuración">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h.1a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v.1a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>
+                </svg>
+            </a>
+            <button type="button" class="nav-sesion" id="nav-sesion" aria-expanded="false" aria-haspopup="true">Iniciar sesión</button>
+            <div class="sesion-menu" id="sesion-menu" hidden></div>
+            <button class="menu-toggle" aria-label="Abrir menú">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<section class="seccion">
+    <div class="contenedor">
+
+        <div class="ajustes-cabecera aparece">
+            <span class="eyebrow">Tu espacio</span>
+            <h2>Configuración</h2>
+            <p>Cambia el aspecto de la tienda como más te guste. La preferencia se guarda en este dispositivo: la próxima vez que entres, estará tal como la dejaste.</p>
+        </div>
+
+        <div class="ajustes-bloque aparece">
+            <h3>Tema de la tienda</h3>
+            <p>Elige entre el look moderno claro o el clásico oscuro con dorados.</p>
+            <div class="tema-opciones">
+                <button type="button" class="tema-opcion" data-tema-elegir="claro">
+                    <span class="tema-muestra muestra-claro"></span>
+                    <strong>Claro</strong>
+                    <small>Fresco y minimal: fondos blancos y acentos suaves. El de todos los días.</small>
+                </button>
+                <button type="button" class="tema-opcion" data-tema-elegir="dorado">
+                    <span class="tema-muestra muestra-dorado"></span>
+                    <strong>Dorado</strong>
+                    <small>El clásico de la casa: negro espresso con detalles dorados. Para gustos elegantes.</small>
+                </button>
+            </div>
+        </div>
+
+        <div class="ajustes-bloque aparece">
+            <h3>Color de acento</h3>
+            <p>El color que resalta en botones, precios y detalles. Se aplica en cualquier tema.</p>
+            <div class="acento-opciones">
+                <button type="button" class="acento-opcion" data-acento-elegir="turquesa">
+                    <span class="acento-punto punto-turquesa"></span> Turquesa
+                </button>
+                <button type="button" class="acento-opcion" data-acento-elegir="dorado">
+                    <span class="acento-punto punto-dorado"></span> Dorado
+                </button>
+                <button type="button" class="acento-opcion" data-acento-elegir="vino">
+                    <span class="acento-punto punto-vino"></span> Vino
+                </button>
+                <button type="button" class="acento-opcion" data-acento-elegir="verde">
+                    <span class="acento-punto punto-verde"></span> Verde
+                </button>
+            </div>
+            <p class="ajustes-nota">¿Prefieres dejarlo como estaba? Elige «Turquesa» con el tema «Claro» y tendrás el aspecto original.</p>
+        </div>
+
+        <div class="ajustes-bloque aparece">
+            <h3>Tu perfil</h3>
+            <p>Ahí puedes guardar tus datos personales (cumpleaños, ciudad, fragancia favorita, notas que te gustan...) para que te conozcamos mejor y recomendarte con acierto.</p>
+            <a href="perfil.html" class="ajustes-enlace">Ir a mi perfil →</a>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <div class="contenedor">
+        <div class="footer-grid">
+            <div class="footer-marca">
+                <span class="marca">The House of Parfum</span>
+                <p>Perfumes originales, elegidos uno por uno, en Lima.</p>
+            </div>
+            <div>
+                <h4>Navegación</h4>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="perfumes.html">Perfumes</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="perfil.html">Mi perfil</a></li>
+                    <li><a href="configuracion.html">Configuración</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contacto</h4>
+                <ul>
+                    <li><a href="mailto:hola@houseofparfum.com">hola@houseofparfum.com</a></li>
+                    <li><a href="https://wa.me/51999999999" target="_blank" rel="noopener">WhatsApp +51 999 999 999</a></li>
+                    <li><span>Lima, Perú</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-base">
+            <p>© 2026 The House of Parfum · Hecho con paciencia en Lima</p>
+        </div>
+    </div>
+</footer>
+
+<script src="js/supabase-config.js"></script>
+<script type="module" src="js/app.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
